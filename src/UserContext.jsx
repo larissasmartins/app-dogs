@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { createContext } from 'react';
 import { TOKEN_POST, TOKEN_VALIDATE_POST, USER_GET } from './api';
+import { useNavigate } from 'react-router-dom';
 
 export const UserContext = createContext();
 
@@ -10,6 +11,7 @@ export const UserStorage = ({ children }) => {
   const [login, setLogin] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   // validar token antes de realizar login automático
   useEffect(() => {
@@ -43,11 +45,22 @@ export const UserStorage = ({ children }) => {
 
   // logar usuario
   async function userLogin(username, password) {
-    const { url, options } = TOKEN_POST({ username, password });
-    const tokenRes = await fetch(url, options);
-    const { token } = await tokenRes.json();
-    window.localStorage.setItem('token', token);
-    getUser(token);
+    try {
+      setError(null);
+      setLoading(true);
+      const { url, options } = TOKEN_POST({ username, password });
+      const tokenRes = await fetch(url, options);
+      if (!tokenRes.ok) throw new Error(`Erro: usuáriio inválido`);
+      const { token } = await tokenRes.json();
+      window.localStorage.setItem('token', token);
+      await getUser(token);
+      navigate('/conta'); // redirecionar para a página da conta após login
+    } catch (err) {
+      setError(err.message);
+      setLogin(false);
+    } finally {
+      setLoading(false);
+    }
   }
 
   // logout usuario
@@ -58,10 +71,13 @@ export const UserStorage = ({ children }) => {
     setLoading(false);
     setLogin(false);
     window.localStorage.removeItem('token');
+    navigate('/login'); // voltar para a página de login após logout
   }
 
   return (
-    <UserContext.Provider value={{ userLogin, userLogout, data }}>
+    <UserContext.Provider
+      value={{ userLogin, userLogout, data, error, loading, login }}
+    >
       {children}
     </UserContext.Provider>
   );
