@@ -22,9 +22,8 @@ export const UserStorage = ({ children }) => {
       setLoading(false);
       setLogin(false);
       window.localStorage.removeItem('token');
-      navigate('/login'); // voltar para a página de login após logout
     },
-    [navigate],
+    [],
   );
 
   async function getUser(token) {
