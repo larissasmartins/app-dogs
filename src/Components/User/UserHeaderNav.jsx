@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { UserContext } from '../../UserContext';
 import FeedImg from '../../Assets/feed.svg?react';
@@ -8,26 +8,26 @@ import SairImg from '../../Assets/sair.svg?react';
 import styles from './UserHeaderNav.module.css';
 
 const UserHeaderNav = () => {
+  const [mobile, setMobile] = useState(null);
   const { userLogout } = useContext(UserContext);
 
   return (
     <nav className={styles.nav}>
-      <NavLink to="/conta">
+      <NavLink to="/conta" end>
         <FeedImg />
-        Minhas fotos
+        {mobile && 'Minhas fotos'}
       </NavLink>
       <NavLink to="/conta/estatisticas">
         <EstatisticasImg />
-        Estatísticas
+        {mobile && 'Estatísticas'}
       </NavLink>
       <NavLink to="/conta/postar">
         <AdicionarImg />
-        Adicionar foto
+        {mobile && 'Adicionar foto'}
       </NavLink>
       <button onClick={userLogout}>
-        {' '}
         <SairImg />
-        Sair
+        {mobile && 'Sair'}
       </button>
     </nav>
   );
