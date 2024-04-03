@@ -16,7 +16,7 @@ const UserPhotoPost = () => {
   const { data, error, loading, request } = useFetch();
   const navigate = useNavigate();
 
-  // redirect the user to the feed page to see the posted picture
+  // redirect the user to the user feed page to see the posted picture
   useEffect(() => {
     if (data) navigate('/conta');
   }, [data, navigate]);
