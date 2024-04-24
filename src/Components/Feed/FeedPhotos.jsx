@@ -20,7 +20,7 @@ const FeedPhotos = () => {
 
   if (error) return <Error error={error} />;
   if (loading) return <Loading />;
-  if (data && data.data)
+  if (data)
     return (
       <ul className={`${styles.feed} animeLeft`}>
         {data.map((photo) => (
