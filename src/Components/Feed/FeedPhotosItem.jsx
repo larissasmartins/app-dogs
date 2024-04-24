@@ -3,6 +3,10 @@ import styles from './FeedPhotosItem.module.css';
 
 const FeedPhotosItem = ({ photo }) => {
   console.log('PHOTO.SCR' + photo.src); // Log the image source
+
+  function handleClick() {
+    setModalPhoto(photo);
+  }
   return (
     <li className={styles.photo}>
       <img src={photo.src} alt={photo.title} />
