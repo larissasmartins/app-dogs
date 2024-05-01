@@ -12,10 +12,10 @@ const useFetch = () => {
       setError(null);
       setLoading(true);
       response = await fetch(url, options);
-      json = response.json();
+      json = await response.json();
       if (response.ok === false) throw new Error(json.message);
     } catch (err) {
-      json = null; //if theres error it will be null
+      json = null; // if theres error it will be null
       setError(err.message);
     } finally {
       setData(json);
