@@ -4,10 +4,12 @@ import { Route, Routes } from 'react-router-dom';
 import Feed from '../Feed/Feed';
 import UserPhotoPost from './UserPhotoPost';
 import UserStats from './UserStats';
+import Head from '../Helper/Head';
 
 const User = () => {
   return (
     <section className="container">
+      <Head title="Minha conta"/>
       <UserHeader />
       <Routes>
         <Route path="/" element={<Feed />} />
