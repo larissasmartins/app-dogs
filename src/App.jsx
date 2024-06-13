@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { UserStorage } from './UserContext';
 import User from './Components/User/User';
 import ProtectedRoute from './Components/Helper/ProtectedRoute';
+import NotFound from './Components/NotFound';
 
 const App = () => {
   return (
@@ -15,18 +16,21 @@ const App = () => {
       <BrowserRouter>
         <UserStorage>
           <Header />
-          <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="login/*" element={<Login />}></Route>
-            <Route
-              path="conta/*"
-              element={
-                <ProtectedRoute>
-                  <User />
-                </ProtectedRoute>
-              }
-            ></Route>
-          </Routes>
+          <main className="AppBody">
+            <Routes>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="login/*" element={<Login />}></Route>
+              <Route
+                path="conta/*"
+                element={
+                  <ProtectedRoute>
+                    <User />
+                  </ProtectedRoute>
+                }
+              ></Route>
+              <Route path="*" element={<NotFound />}></Route>          
+            </Routes>
+          </main>
           <Footer />
         </UserStorage>
       </BrowserRouter>
