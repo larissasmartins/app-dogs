@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import styles from './FeedModal.module.css';
 import useFetch from '../../Hooks/useFetch';
+import Error from '../Helper/Error';
+import Loading from '../Helper/Loading';
 import { PHOTOS_GET } from '../../api';
+import PhotoContent from '../Photo/PhotoContent';
 
-const FeedModal = ({ photo }) => {
+const FeedModal = ({ photo }) => { 
   const { data, loading, error, request } = useFetch();
 
   useEffect(() => {
@@ -13,7 +16,9 @@ const FeedModal = ({ photo }) => {
 
   return (
     <div className={styles.modal}>
-      <img src={photo.src}></img>
+      {error && <Error error={error} />}
+      {loading && <Loading />}
+      {data && <PhotoContent data={data} />}
     </div>
   );
 };
