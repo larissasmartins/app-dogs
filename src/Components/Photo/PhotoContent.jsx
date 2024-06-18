@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './PhotoContent.module.css';
 import { Link } from 'react-router-dom';
-// import PhotoComments from './PhotoComments';
+import PhotoComments from './PhotoComments';
 
 const PhotoContent = ({ data }) => {
-  const { photo, comments } = data;
+  const { photo, comments } = data; // data processed in FeedModal
 
+  // show photo and its info 
   return (
     <div className={styles.photo}>
       <div className={styles.img}>
@@ -13,7 +14,7 @@ const PhotoContent = ({ data }) => {
       </div>
       <div className={styles.details}>
         <div>
-          <p>
+          <p className={styles.author}>
             <Link to={`/perfil/${photo.author}`}>@{photo.author}</Link>
             <span className={styles.visualizacoes}>{photo.acessos}</span>
           </p>
@@ -26,7 +27,7 @@ const PhotoContent = ({ data }) => {
           </ul>
         </div>
       </div>
-      {/* <PhotoComments id={photo.id} comments={comments} /> */}
+      <PhotoComments id={photo.id} comments={comments} />
     </div>
   );
 };
