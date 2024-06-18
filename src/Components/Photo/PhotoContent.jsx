@@ -10,12 +10,12 @@ const PhotoContent = ({ data }) => {
   return (
     <div className={styles.photo}>
       <div className={styles.img}>
-        {/* <img src={photo.src} alt={photo.title} /> */}
+        <img src={photo.src} alt={photo.title} />
       </div>
       <div className={styles.details}>
         <div>
           <p>
-            {/* <Link to={`/perfil/${photo.author}`}>@{photo.author}</Link> */}
+            <Link to={`/perfil/${photo.author}`}>@{photo.author}</Link>
           </p>
         </div>
       </div>
