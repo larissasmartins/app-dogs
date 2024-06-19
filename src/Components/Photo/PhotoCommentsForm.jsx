@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import SendImg from '../../Assets/enviar.svg?react';
 import useFetch from '../../Hooks/useFetch';
 import Error from '../Helper/Error';
 import { COMMENT_POST } from '../../api';
+import styles from './PhotoCommentsForm.module.css'
 
 export const PhotoCommentsForm = ({ id, setComments }) => {
   const [comment, setComment] = useState('');
@@ -23,15 +24,15 @@ export const PhotoCommentsForm = ({ id, setComments }) => {
 
   return (
     // its s different form from the other, its holds a textarea, not an input
-    <form onSubmit={handleSubmit}>
-      <textarea
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <textarea className={styles.textarea}
         id="comment"
         name="comment"
         placeholder="Comente..."
         value={comment}
         onChange={({ target }) => setComment(target.value)}
       />
-      <button>
+      <button className={styles.button}>
         <SendImg />
       </button>
       <Error error={error} />
