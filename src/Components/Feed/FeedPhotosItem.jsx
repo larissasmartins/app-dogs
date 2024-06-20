@@ -3,7 +3,6 @@ import styles from './FeedPhotosItem.module.css';
 import Image from '../Helper/Image';
 
 const FeedPhotosItem = ({ photo, setModalPhoto }) => {
-  console.log('PHOTO.SCR' + photo.src); // Log the image source
   function handleClick() {
     setModalPhoto(photo);
   }
