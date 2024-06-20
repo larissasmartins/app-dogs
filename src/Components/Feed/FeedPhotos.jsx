@@ -14,7 +14,6 @@ const FeedPhotos = ({ page, user, setModalPhoto, setInfinite }) => {
       const total = 6;
       const { url, options } = PHOTOS_GET({ page, total, user }); //show only the pics from the user on the page "minha conta"
       const { response, json } = await request(url, options);
-      console.log('request ', json)
       if (response && response.ok && json.length < total) setInfinite(false);
     }
     fetchPhotos();
